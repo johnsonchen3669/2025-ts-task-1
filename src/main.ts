@@ -26,10 +26,15 @@ export const cart: {
 // 說明：請定義 PlantCategory Enum，並示範反向映射。
 // 目標：理解 Enum 定義與反向映射的寫法。
 
-// export enum PlantCategory {
+export enum PlantCategory {
+  LargePlant,
+  MediumPlant,
+  SmallPlant,
+}
+export const catKeyName: string = PlantCategory[PlantCategory.LargePlant];
 
-// }
-// export const catKeyName: string = PlantCategory[/* TODO: 取得 LargePlant 的數值 */ 0];
+// PlantCategory.LargePlant 為 0, PlantCategory[0] 為 "LargePlant"
+console.log(catKeyName); // 輸出 "LargePlant"
 
 // --- 題目三：type（& 組合） ---
 // 說明：請用 type 定義 BasicPlant 與 StockInfo，再用 & 組合為 OnShelfPlant，建立範例變數。
