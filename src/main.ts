@@ -141,10 +141,10 @@ export function updatePlant(input: Partial<PlantBase>): Required<PlantBase> {
 // --- 題目八：Record ---
 // 說明：用 Record 表示庫存表。
 // 目標：以字串鍵對應到嚴格結構。
-export type Inventory = "PLANT-1001" | "PLANT-2001";
+export type Inventory = 'PLANT-1001' | 'PLANT-2001';
 export const inventory: Record<Inventory, number> = {
-  "PLANT-1001": 42,
-  "PLANT-2001": 8,
+  'PLANT-1001': 42,
+  'PLANT-2001': 8,
 };
 
 // --- 題目九：Pick、Omit ---
@@ -156,8 +156,13 @@ export const inventory: Record<Inventory, number> = {
 export type CartPlant = Pick<PlantItem, 'id' | 'name' | 'price'>;
 export type PublicPlant = Omit<PlantItem, 'weightKg' | 'shipFrom'>;
 
-export const cartPlant: CartPlant = { id: 101, name: "琴葉榕", price: 2500 };
-export const publicPlant: PublicPlant = { id: 101, name: "琴葉榕", price: 2500, currency: "TWD" };
+export const cartPlant: CartPlant = { id: 101, name: '琴葉榕', price: 2500 };
+export const publicPlant: PublicPlant = {
+  id: 101,
+  name: '琴葉榕',
+  price: 2500,
+  currency: 'TWD',
+};
 
 // --- 題目十：綜合練習 ---
 // 說明：這是一個後台新增商品的功能，請將以下需求用 TypeScript 實作。
@@ -174,16 +179,31 @@ export const publicPlant: PublicPlant = { id: 101, name: "琴葉榕", price: 250
     - imageUrl: 字串
     - imagesUrl: 字串陣列（非必要）
 */
+type Product = {
+  id: string;
+  title: string;
+  category: string;
+  description: string;
+  origin_price: number;
+  price: number;
+  is_enabled: boolean;
+  unit: string;
+  imageUrl: string;
+  imagesUrl?: string[];
+};
 
 /*
 2️⃣ 定義 type CreateProduct
 由 Product 衍生，但不包含 id（使用 Omit）
 */
+type CreateProduct = Omit<Product, 'id'>;
 
 /*
 3️⃣ 定義 type UpdateProduct
 由 Product 衍生，id, title 必須有，其餘皆可選（使用 Partial 與 Omit）
 */
+type UpdateProduct = Partial<Omit<Product, 'id' | 'title'>> &
+  Pick<Product, 'id' | 'title'>;
 
 /*
 4️⃣ 實作函式 submitProduct(type, product)
@@ -195,3 +215,13 @@ export const publicPlant: PublicPlant = { id: 101, name: "琴葉榕", price: 250
 create → "新增商品成功：${product.title}"
 update → "更新商品成功：${product.id}"
 */
+export function submitProduct(
+  type: 'create' | 'update',
+  product: CreateProduct | UpdateProduct
+): void {
+  if (type === 'create') {
+    console.log(`新增商品成功：${(product as CreateProduct).title}`);
+  } else {
+    console.log(`更新商品成功：${(product as UpdateProduct).id}`);
+  }
+}
