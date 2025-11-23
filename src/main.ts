@@ -80,16 +80,17 @@ export const fiddleLeafFig: PlantItem = {
 // --- 題目五：函式定義（以 type 標註參數與回傳） ---
 // 說明：定義 CalcTotalFn，計算 items 小計，若有 coupon 則折抵（percent/cash）。
 // 目標：以 type 定義函式型別並實作。
-// export type CartItem = { price: number; qty: number };
-// export type Coupon = { type: "percent" | "cash"; amount: number };
-// export type CalcTotalFn = /* TODO: (參數型別) => 型別 */ any;
+export type CartItem = { price: number; qty: number };
+export type Coupon = { type: 'percent' | 'cash'; amount: number };
+export type CalcTotalFn = (items: CartItem[], coupon: Coupon) => number;
 
-// export const calcTotal /* TODO: CalcTotalFn */ = (items, coupon) => {
-//   const subtotal = items.reduce((sum, it) => sum + it.price * it.qty, 0);
-//   if (!coupon) return subtotal;
-//   if (coupon.type === "percent") return Math.max(0, Math.round(subtotal * (1 - coupon.amount / 100)));
-//   return Math.max(0, subtotal - coupon.amount);
-// };
+export const calcTotal: CalcTotalFn = (items, coupon) => {
+  const subtotal = items.reduce((sum, it) => sum + it.price * it.qty, 0);
+  if (!coupon) return subtotal;
+  if (coupon.type === 'percent')
+    return Math.max(0, Math.round(subtotal * (1 - coupon.amount / 100)));
+  return Math.max(0, subtotal - coupon.amount);
+};
 
 // --- 題目六：Generics + API 應用（使用 axios)  ---
 // 說明：import axios 與 AxiosResponse，定義 PlantDTO，實作 fetchPlants。
