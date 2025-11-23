@@ -40,17 +40,17 @@ console.log(catKeyName); // 輸出 "LargePlant"
 // 說明：請用 type 定義 BasicPlant 與 StockInfo，再用 & 組合為 OnShelfPlant，建立範例變數。
 // 目標：理解 type 宣告與交叉型別的寫法。
 
-// export type BasicPlant = /* TODO: { id: 型別; name: 型別; price: 型別 } */ any;
-// export type StockInfo = /* TODO: { sku: 型別; quantity: 型別 } */ any;
-// export type OnShelfPlant = /* TODO: BasicPlant, StockInfo 組合 */ any;
+export type BasicPlant = { id: number; name: string; price: number };
+export type StockInfo = { sku: string; quantity: number };
+export type OnShelfPlant = BasicPlant & StockInfo;
 
-// export const snakePlant /* TODO: OnShelfPlant */ = {
-//   id: 2,
-//   name: "虎尾蘭",
-//   price: 480,
-//   sku: "PLANT-1001",
-//   quantity: 42,
-// };
+export const snakePlant: OnShelfPlant = {
+  id: 2,
+  name: '虎尾蘭',
+  price: 480,
+  sku: 'PLANT-1001',
+  quantity: 42,
+};
 
 // --- 題目四：interface（extends 組合） ---
 // 說明：定義 Price 與 Shippable，PlantItem 需 extends 兩者並包含 id/name。
