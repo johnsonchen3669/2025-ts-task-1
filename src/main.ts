@@ -96,17 +96,21 @@ export const calcTotal: CalcTotalFn = (items, coupon) => {
 // 說明：import axios 與 AxiosResponse，定義 PlantDTO，實作 fetchPlants。
 // API: https://fakestoreapi.com/products
 // 目標：理解泛型定義與應用。
-// import axios from 'axios'; /* TODO */
-// export type PlantDTO = {
-//   id: number;
-//   title: string;
-//   price: number;
-//   category: string;
-// };
+import axios from 'axios';
+import type { AxiosResponse } from 'axios';
+export type PlantDTO = {
+  id: number;
+  title: string;
+  price: number;
+  description: string;
+  category: string;
+  image: string;
+  rating: { rate: number; count: number };
+};
 
-// export const fetchPlants = async () /* TODO */ => {
-//   return axios.get('https://fakestoreapi.com/products');
-// }
+export const fetchPlants = async (): Promise<AxiosResponse<PlantDTO[]>> => {
+  return axios.get('https://fakestoreapi.com/products');
+};
 
 // --- 題目七：Required、Partial ---
 // 說明：updatePlant(input) 接受部分更新，實際回傳需是 Required<PlantBase>。
