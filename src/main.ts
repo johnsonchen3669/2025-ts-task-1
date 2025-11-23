@@ -147,17 +147,17 @@ export const inventory: Record<Inventory, number> = {
   "PLANT-2001": 8,
 };
 
-// // --- 題目九：Pick、Omit ---
-// // 說明：type PlantItem 由第四題定義，請用 Pick/Omit 建立兩個新型別。
-// // 目標：理解 Pick/Omit 的用法與差異。
-// // 需求：
-// // 1) CartPlant：只需 id/name/price
-// // 2) PublicPlant：移除重量與出貨地
-// export type CartPlant = /* TODO */ any;
-// export type PublicPlant = /* TODO */ any;
+// --- 題目九：Pick、Omit ---
+// 說明：type PlantItem 由第四題定義，請用 Pick/Omit 建立兩個新型別。
+// 目標：理解 Pick/Omit 的用法與差異。
+// 需求：
+// 1) CartPlant：只需 id/name/price
+// 2) PublicPlant：移除重量與出貨地
+export type CartPlant = Pick<PlantItem, 'id' | 'name' | 'price'>;
+export type PublicPlant = Omit<PlantItem, 'weightKg' | 'shipFrom'>;
 
-// export const cartPlant /* TODO */ = { id: 101, name: "琴葉榕", price: 2500 };
-// export const publicPlant /* TODO */ = { id: 101, name: "琴葉榕", price: 2500, currency: "TWD" };
+export const cartPlant: CartPlant = { id: 101, name: "琴葉榕", price: 2500 };
+export const publicPlant: PublicPlant = { id: 101, name: "琴葉榕", price: 2500, currency: "TWD" };
 
 // --- 題目十：綜合練習 ---
 // 說明：這是一個後台新增商品的功能，請將以下需求用 TypeScript 實作。
