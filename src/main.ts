@@ -115,18 +115,28 @@ export const fetchPlants = async (): Promise<AxiosResponse<PlantDTO[]>> => {
 // --- 題目七：Required、Partial ---
 // 說明：updatePlant(input) 接受部分更新，實際回傳需是 Required<PlantBase>。
 // 目標：掌握 Partial/Required 的互補與回傳保證。
-// export type PlantBase = { id: number; name: string; price: number; description?: string };
+export type PlantBase = {
+  id: number;
+  name: string;
+  price: number;
+  description?: string;
+};
 
-// export function updatePlant(input: /* TODO */ any): /* TODO */ any {
-//   const existing: /* TODO */ any = { id: 1, name: "虎尾蘭", price: 480, description: "耐陰、淨化空氣" };
-//   const merged = { ...existing, ...input };
-//   return {
-//     id: merged.id,
-//     name: merged.name,
-//     price: merged.price,
-//     description: merged.description ?? "",
-//   };
-// }
+export function updatePlant(input: Partial<PlantBase>): Required<PlantBase> {
+  const existing: Required<PlantBase> = {
+    id: 1,
+    name: '虎尾蘭',
+    price: 480,
+    description: '耐陰、淨化空氣',
+  };
+  const merged = { ...existing, ...input };
+  return {
+    id: merged.id,
+    name: merged.name,
+    price: merged.price,
+    description: merged.description ?? '',
+  };
+}
 
 // --- 題目八：Record ---
 // 說明：用 Record 表示庫存表。
