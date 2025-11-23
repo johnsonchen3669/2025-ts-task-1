@@ -141,11 +141,11 @@ export function updatePlant(input: Partial<PlantBase>): Required<PlantBase> {
 // --- 題目八：Record ---
 // 說明：用 Record 表示庫存表。
 // 目標：以字串鍵對應到嚴格結構。
-// export type Inventory = /* TODO */ any;
-// export const inventory /* TODO */ = {
-//   "PLANT-1001": 42,
-//   "PLANT-2001": 8,
-// };
+export type Inventory = "PLANT-1001" | "PLANT-2001";
+export const inventory: Record<Inventory, number> = {
+  "PLANT-1001": 42,
+  "PLANT-2001": 8,
+};
 
 // // --- 題目九：Pick、Omit ---
 // // 說明：type PlantItem 由第四題定義，請用 Pick/Omit 建立兩個新型別。
