@@ -141,8 +141,7 @@ export function updatePlant(input: Partial<PlantBase>): Required<PlantBase> {
 // --- 題目八：Record ---
 // 說明：用 Record 表示庫存表。
 // 目標：以字串鍵對應到嚴格結構。
-export type Inventory = 'PLANT-1001' | 'PLANT-2001';
-export const inventory: Record<Inventory, number> = {
+export const inventory: Record<string, number> = {
   'PLANT-1001': 42,
   'PLANT-2001': 8,
 };
